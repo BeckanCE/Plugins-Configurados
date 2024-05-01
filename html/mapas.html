@@ -1,175 +1,114 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapas Custom</title>
-    <style>
-        body {
-            background-color: #000; /* Fondo negro */
-            color: #fff; /* Texto blanco */
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MakakoTV</title>
+<link rel="icon" type="image/x-icon" href="Servidores-Makako.ico">
+<style>
+    body {
+        margin: 0;
+    }
 
-        #container {
-            max-width: 600px;
-            margin: 50px auto;
-            text-align: center;
-        }
+    #contenedor {
+        max-width: 600px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 20px auto; /* Centra el contenedor horizontalmente */
+    }
 
-        h1 {
-            margin-bottom: 20px;
-        }
+    .archivo {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
 
-        .button-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 20px;
-        }
+    .archivo .nombre {
+        flex: 1;
+    }
 
-        .button-group {
-            width: calc(20% - 20px); /* 20% width with 20px margin on both sides */
-            box-sizing: border-box;
-            margin: 0 0 20px 0;
-            text-align: center; /* Para centrar el contenido */
-        }
+    .archivo .detalle {
+        margin-left: 10px;
+    }
+</style>
+<script>
+    // Función para ordenar los archivos
+    function ordenarArchivos(atributo, direccion) {
+        var archivos = document.querySelectorAll('.archivo');
+        var archivosArray = Array.prototype.slice.call(archivos);
 
-        .button {
-            background-color: #2ecc71;
-            color: #fff;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            display: block;
-            margin-top: 10px;
-        }
+        archivosArray.sort(function(a, b) {
+            var valorA = a.getAttribute(atributo);
+            var valorB = b.getAttribute(atributo);
 
-        .button img {
-            width: 100%; /* La imagen ocupa el 100% del contenedor */
-            height: auto; /* Mantiene la proporción original de la imagen */
-            border-radius: 5px 5px 0 0; /* Esquinas redondeadas solo en la parte superior */
-        }
+            if (atributo === 'data-modificacion') {
+                valorA = new Date(parseInt(valorA));
+                valorB = new Date(parseInt(valorB));
+                if (direccion === 'ascendente') {
+                    return valorA - valorB;
+                } else {
+                    return valorB - valorA;
+                }
+            } else if (atributo === 'data-tamano') {
+                valorA = parseFloat(valorA) / (1024 * 1024); // Convertir a megabytes
+                valorB = parseFloat(valorB) / (1024 * 1024); // Convertir a megabytes
+                if (direccion === 'ascendente') {
+                    return valorA - valorB;
+                } else {
+                    return valorB - valorA;
+                }
+            } else {
+                if (direccion === 'ascendente') {
+                    return valorA.localeCompare(valorB);
+                } else {
+                    return valorB.localeCompare(valorA);
+                }
+            }
+        });
 
-        .button-text {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-    </style>
+        var contenedor = document.getElementById('lista-archivos');
+        contenedor.innerHTML = '';
+
+        archivosArray.forEach(function(archivo) {
+            contenedor.appendChild(archivo);
+        });
+    }
+</script>
 </head>
 <body>
-    <div id="container">
-        <h1>Mapas Custom</h1>
+<div id="contenedor">
+    <h1>Grabaciones de MakakoTV</h1>
+    <button onclick="ordenarArchivos('data-nombre', 'ascendente')">Ordenar por nombre de archivo (ascendente)</button>
+    <button onclick="ordenarArchivos('data-nombre', 'descendente')">Ordenar por nombre de archivo (descendente)</button>
+    <button onclick="ordenarArchivos('data-tamano', 'ascendente')">Ordenar por tamaño de archivo (ascendente)</button>
+    <button onclick="ordenarArchivos('data-tamano', 'descendente')">Ordenar por tamaño de archivo (descendente)</button>
+    <button onclick="ordenarArchivos('data-modificacion', 'ascendente')">Ordenar por fecha de modificación (ascendente)</button>
+    <button onclick="ordenarArchivos('data-modificacion', 'descendente')">Ordenar por fecha de modificación (descendente)</button>
+    <div id="lista-archivos">
+        <?php
+        // Lee los archivos del directorio actual
+        $archivos = scandir('.');
         
-        <div class="button-container">
-            <!-- Grupo 1 -->
-            <div class="button-group">
-			    <span class="button-text">Suicide Blitz 2</span>
-                <img src="images/SuicideBlitz2.png" alt="Imagen para Botón 1">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1910161083" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 2 -->
-            <div class="button-group">
-		       	<span class="button-text">Haunted Forest</span>
-                <img src="images/HauntedForest.png" alt="Imagen para Botón 2">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2325347179" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 3 -->
-            <div class="button-group">
-			    <span class="button-text">No Mercy Rehab</span>
-                <img src="images/NoMercyRehab.png" alt="Imagen para Botón 3">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2892224388" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 4 -->
-            <div class="button-group">
-			    <span class="button-text">Hard Rain Downpour</span>
-                <img src="images/HardRainDownpour.png" alt="Imagen para Botón 4">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=306243689" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 5 -->
-            <div class="button-group">
-                <span class="button-text">Carried Off</span>
-                <img src="images/CarriedOff.png" alt="Imagen para Botón 5">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=381431565" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 6 -->
-            <div class="button-group">
-                <span class="button-text">Don't Fall</span>
-                <img src="images/Don'tFall.png" alt="Imagen para Botón 6">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2208092043" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 7 -->
-            <div class="button-group">
-			    <span class="button-text">Dark Carnival Remix</span>
-                <img src="images/DarkCarnivalRemix.png" alt="Imagen para Botón 7">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1575673903" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 8 -->
-            <div class="button-group">
-			    <span class="button-text">Unforgivable Night Redux</span>
-                <img src="images/UnforgivableNightRedux.png" alt="Imagen para Botón 8">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2866007403" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 9 -->
-            <div class="button-group">
-			    <span class="button-text">Urban Flight</span>
-                <img src="images/UrbanFlight.png" alt="Imagen para Botón 9">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=121086524" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 10 -->
-            <div class="button-group">
-			    <span class="button-text">Big Wat</span>
-                <img src="images/BigWat.png" alt="Imagen para Botón 10">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=210140990" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 11 -->
-            <div class="button-group">
-			    <span class="button-text">Dark Blood 2</span>
-                <img src="images/DarkBlood2.png" alt="Imagen para Botón 11">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=121175467" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 12 -->
-            <div class="button-group">
-			    <span class="button-text">Diescraper Redux</span>
-                <img src="images/DiescraperRedux.png" alt="Imagen para Botón 12">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=121116980" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 13 -->
-            <div class="button-group">
-			    <span class="button-text">Open Road</span>
-                <img src="images/OpenRoad.png" alt="Imagen para Botón 13">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=123734884" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 14 -->
-            <div class="button-group">
-			    <span class="button-text">Warcelona</span>
-                <img src="images/Warcelona.png" alt="Imagen para Botón 14">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1910147798" class="button" target="_blank">Steam Workshop</a>
-            </div>
-
-            <!-- Grupo 15 -->
-            <div class="button-group">
-			    <span class="button-text">Heaven Can Wait II</span>
-                <img src="images/HeavenCanWaitII.png" alt="Imagen para Botón 15">
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=629476830" class="button" target="_blank">Steam Workshop</a>
-            </div>
-        </div>
+        // Recorre los archivos y muestra su nombre y fecha de modificación
+        foreach ($archivos as $archivo) {
+            if ($archivo != "." && $archivo != ".." && $archivo != "index.php") {
+                $rutaArchivo = $archivo;
+                $tamanioArchivo = filesize($archivo) / (1024 * 1024); // Convertir a megabytes
+                $fechaModificacion = filemtime($archivo);
+                
+                echo "<div class='archivo' data-nombre='" . $archivo . "' data-tamano='" . $tamanioArchivo . "' data-modificacion='" . $fechaModificacion . "'>";
+                echo "<div class='nombre'>";
+                echo "<a href='" . $rutaArchivo . "' download>" . $archivo . "</a>";
+                echo "</div>";
+                echo "<div class='detalle'>";
+                echo "Subido: " . date("Y-m-d H:i:s", $fechaModificacion) . " | Tamaño: " . number_format($tamanioArchivo, 2) . " MB";
+                echo "</div>";
+                echo "</div>";
+            }
+        }
+        ?>
     </div>
+</div>
 </body>
 </html>
