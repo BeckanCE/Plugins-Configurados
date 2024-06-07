@@ -52,6 +52,7 @@ ConVar g_hTimeStart = null;
 ConVar g_hTimeStop = null;
 ConVar g_hFinishMap = null;
 ConVar g_hDemoPath = null;
+ConVar g_hDemoName = null;
 
 bool g_bIsRecording = false;
 bool g_bIsManual = false;
@@ -67,10 +68,11 @@ public void OnPluginStart()
 	g_hTimeStop = CreateConVar("sm_autorecord_timestop", "-1", "Hour in the day to stop recording (0-23, -1 disables)");
 	g_hFinishMap = CreateConVar("sm_autorecord_finishmap", "1", "If 1, continue recording until the map ends", _, true, 0.0, true, 1.0);
 	g_hDemoPath = CreateConVar("sm_autorecord_path", ".", "Path to store recorded demos");
+	g_hDemoName = CreateConVar("sm_autorecord_name", "auto", "Name of Server");
 
 	AutoExecConfig(true, "autorecorder");
 
-	RegAdminCmd("sm_record", Command_Record, ADMFLAG_KICK, "Starts a SourceTV demo");
+	RegConsoleCmd("sm_record", Command_Record, "Starts a SourceTV demo");
 	RegAdminCmd("sm_stoprecord", Command_StopRecord, ADMFLAG_KICK, "Stops the current SourceTV demo");
 
 	g_hTvEnabled = FindConVar("tv_enable");
@@ -87,6 +89,7 @@ public void OnPluginStart()
 	g_hTimeStart.AddChangeHook(OnConVarChanged);
 	g_hTimeStop.AddChangeHook(OnConVarChanged);
 	g_hDemoPath.AddChangeHook(OnConVarChanged);
+	g_hDemoName.AddChangeHook(OnConVarChanged);
 
 	CreateTimer(300.0, Timer_CheckStatus, _, TIMER_REPEAT);
 
@@ -218,24 +221,31 @@ int GetPlayerCount()
 
 void StartRecord()
 {
-	if(g_hTvEnabled.BoolValue && !g_bIsRecording)
-	{
-		char sPath[PLATFORM_MAX_PATH];
-		char sTime[16];
-		char sMap[32];
+    if(g_hTvEnabled.BoolValue && !g_bIsRecording)
+    {
+        char sName[32];
+        char sPath[PLATFORM_MAX_PATH];
+        char sTime[16];
+        char sMap[32];
 
-		g_hDemoPath.GetString(sPath, sizeof(sPath));
-		FormatTime(sTime, sizeof(sTime), "%Y%m%d-%H%M%S", GetTime());
-		GetCurrentMap(sMap, sizeof(sMap));
+        g_hDemoPath.GetString(sPath, sizeof(sPath));
+        FormatTime(sTime, sizeof(sTime), "%Y%m%d-%H%M%S", GetTime());
+        GetCurrentMap(sMap, sizeof(sMap));
 
-		// replace slashes in map path name with dashes, to prevent fail on workshop maps
-		ReplaceString(sMap, sizeof(sMap), "/", "-", false);		
+        // replace slashes in map path name with dashes, to prevent fail on workshop maps
+        ReplaceString(sMap, sizeof(sMap), "/", "-", false);
 
-		ServerCommand("tv_record \"%s/auto-%s-%s\"", sPath, sTime, sMap);
-		g_bIsRecording = true;
+        g_hDemoName.GetString(sName, sizeof(sName));
+        ServerCommand("tv_record \"%s/%s-%s-%s\"", sPath, sName, sTime, sMap);
+        g_bIsRecording = true;
 
-		LogMessage("Recording to auto-%s-%s.dem", sTime, sMap);
-	}
+        // Notify the start of a new chapter
+        char sChapterMessage[128];
+        Format(sChapterMessage, sizeof(sChapterMessage), "\x03[TV] Descarga la repetición en:\x0F https://makako.xyz/demos/files/%s-%s-%s.dem", sName, sTime, sMap);
+        PrintToChatAll(sChapterMessage);
+
+        LogMessage("Recording to %s-%s-%s.dem", sName, sTime, sMap);
+    }
 }
 
 void StopRecord()
