@@ -35,18 +35,15 @@
     <div class="container" id="map-container">
         <?php
         $maps = [
-            ["title" => "Carried Off", "link" => "https://makako.xyz/resources/carriedoff.vpk", "image" => "images/carriedoff.png"],
             ["title" => "Haunted Forest", "link" => "https://makako.xyz/resources/hauntedforest_v3.vpk", "image" => "images/hauntedforest.png"],
             ["title" => "Detour Ahead", "link" => "https://makako.xyz/resources/detourahead.vpk", "image" => "images/detourahead.png"],
             ["title" => "Dead Before Dawn", "link" => "https://makako.xyz/resources/deadbeforedawn2_dc.vpk", "image" => "images/deadbeforedawn2_dc.png"],
             ["title" => "Diescraper Redux v3.62", "link" => "https://makako.xyz/resources/l4d2_diescraper_362.vpk", "image" => "images/l4d2_diescraper_362.png"],
             ["title" => "Hard Rain Downpour", "link" => "https://makako.xyz/resources/downpour.vpk", "image" => "images/downpour.png"],
             ["title" => "Suicide Blitz 2", "link" => "https://makako.xyz/resources/suicideblitz2.vpk", "image" => "images/suicideblitz2.png"],
-            ["title" => "Open Road", "link" => "https://makako.xyz/resources/openroad.vpk", "image" => "images/openroad.png"],
             ["title" => "Urban Flight", "link" => "https://makako.xyz/resources/urbanflight.vpk", "image" => "images/urbanflight.png"],
             ["title" => "No Mercy Rehab", "link" => "https://makako.xyz/resources/nomercyrehab.vpk", "image" => "images/nomercyrehab.png"],
             ["title" => "Dark Carnival Remix", "link" => "https://makako.xyz/resources/dark%20carnival%20remix.vpk", "image" => "images/dark carnival remix.png"],
-            ["title" => "Dark Blood 2", "link" => "https://makako.xyz/resources/darkblood2_v3.vpk", "image" => "images/darkblood2_v3.png"],
             ["title" => "Back to School", "link" => "https://makako.xyz/resources/bts_l4d2.vpk", "image" => "images/bts_l4d2.png"],
             ["title" => "Blood Tracks", "link" => "https://makako.xyz/resources/bloodtracks.vpk", "image" => "images/bloodtracks.png"],
             ["title" => "Left Behind", "link" => "https://makako.xyz/resources/behind.vpk", "image" => "images/leftbehind.png"],
@@ -54,13 +51,11 @@
             ["title" => "Heaven Can Wait II", "link" => "https://makako.xyz/resources/heavencanwaitl4d2.vpk", "image" => "images/heavencanwaitl4d2.png"],
             ["title" => "Crash Course: ReRouted", "link" => "https://makako.xyz/resources/ccrerouted.vpk", "image" => "images/ccrerouted.png"],
             ["title" => "City 17 v3.2", "link" => "https://makako.xyz/resources/city17l4d2.vpk", "image" => "images/city17l4d2.png"],
-            ["title" => "City of the Dead", "link" => "https://makako.xyz/resources/city%20of%20the%20dead%20map.vpk", "image" => "images/city of the dead map.png"],
+            ["title" => "City Of The Dead", "link" => "https://makako.xyz/resources/city%20of%20the%20dead%20map.vpk", "image" => "images/city of the dead map.png"],
             ["title" => "Day Break", "link" => "https://makako.xyz/resources/daybreak_v3.vpk", "image" => "images/daybreak_v3.png"],
-            ["title" => "Drop Dead Gorges v2.1", "link" => "https://makako.xyz/resources/ddg_v2_1.vpk", "image" => "images/dropdeadgorges.png"],
             ["title" => "Deadbeat Escape", "link" => "https://makako.xyz/resources/deadbeatescape.vpk", "image" => "images/deadbeatescape.png"],
             ["title" => "Death Sentence", "link" => "https://makako.xyz/resources/deathsentence.vpk", "image" => "images/deathsentence.png"],
             ["title" => "Energy Crisis", "link" => "https://makako.xyz/resources/energycrisis.vpk", "image" => "images/energycrisis.png"],
-            ["title" => "Fatal Freight", "link" => "https://makako.xyz/resources/cmpn_FatalFreightFix.vpk", "image" => "images/cmpn_FatalFreightFix.png"],
             ["title" => "Highway To Hell", "link" => "https://makako.xyz/resources/highwaytohell.vpk", "image" => "images/highwaytohell.png"],
             ["title" => "I Hate Mountains 2 v1.5", "link" => "https://makako.xyz/resources/ihatemountains2.vpk", "image" => "images/ihatemountains2.png"],
             ["title" => "Arena of the Dead 2 v5", "link" => "https://makako.xyz/resources/jsarena2.vpk", "image" => "images/arenaofthedead.png"],
@@ -70,7 +65,12 @@
             ["title" => "The Undead Zone", "link" => "https://makako.xyz/resources/undead_zone.vpk", "image" => "images/undead_zone.png"],
             ["title" => "Big Wat", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=210140990", "image" => "images/bigwat.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"],
             ["title" => "Don't Fall", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=2208092043", "image" => "images/dontfall.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"],
-            ["title" => "Unforgivable Night Redux", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=2866007403", "image" => "images/unforgivable-night.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"]
+            ["title" => "Unforgivable Night Redux", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=2866007403", "image" => "images/unforgivable-night.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"],
+            ["title" => "Drop Dead Gorges v2.1", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=3307446423", "image" => "images/dropdeadgorges.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"],
+            ["title" => "Open Road", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=3308734721", "image" => "images/openroad.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"],
+            ["title" => "Dark Blood 2", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=3308737726", "image" => "images/darkblood2.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"],
+            ["title" => "Fatal Freight", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=3306147567", "image" => "images/fatalfreight.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"],
+            ["title" => "Carried Off", "link" => "https://steamcommunity.com/sharedfiles/filedetails/?id=3306083995", "image" => "images/carriedoff.png", "buttonClass" => "btn-subscribe", "buttonText" => "Suscribirse"]
         ];
 
         usort($maps, function($a, $b) {
