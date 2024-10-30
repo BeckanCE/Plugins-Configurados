@@ -1,33 +1,3 @@
-/*
-* 
-* Auto Recorder
-* http://forums.alliedmods.net/showthread.php?t=92072
-* 
-* Description:
-* Automates SourceTV recording based on player count
-* and time of day. Also allows admins to manually record.
-* 
-* Changelog
-* May 09, 2009 - v.1.0.0:
-*   [*] Initial Release
-* May 11, 2009 - v.1.1.0:
-*   [+] Added path cvar to control where demos are stored
-*   [*] Changed manual recording to override automatic recording
-*   [+] Added seconds to demo names
-* May 04, 2016 - v.1.1.1:
-*   [*] Changed demo file names to replace slashes with hyphens [ajmadsen]
-* Aug 26, 2016 - v.1.2.0:
-*   [*] Now ignores bots in the player count by default
-*   [*] The SourceTV client is now always ignored in the player count
-*   [+] Added sm_autorecord_ignorebots to control whether to ignore bots
-*   [*] Now checks the status of the server immediately when a setting is changed
-* Jun 21, 2017 - v.1.3.0:
-*   [*] Fixed minimum player count setting being off by one
-*   [*] Fixed player counting code getting out of range
-*   [*] Updated source code to the new syntax
-* 
-*/
-
 #include <sourcemod>
 
 #pragma semicolon 1
@@ -41,7 +11,7 @@ public Plugin myinfo =
 	author = "Stevo.TVR",
 	description = "Automates SourceTV recording based on player count and time of day.",
 	version = PLUGIN_VERSION,
-	url = "http://www.theville.org"
+	url = ""
 }
 
 ConVar g_hTvEnabled = null;
