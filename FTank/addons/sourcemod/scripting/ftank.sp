@@ -25,11 +25,11 @@ public OnMapStart()
     }
 }
 
-// Temporizador que ejecuta el comando después de 20 segundos
+// Temporizador que ejecuta el comando después de 22 segundos
 public Action:Timer_ExecuteCommand(Handle:timer, any:unused)
 {
-    // Ejecutar el comando sm_ftank 90
-    ServerCommand("sm_ftank 90");
+    // Ejecutar el comando sm_ftank 85
+    ServerCommand("sm_ftank 85");
     
     // Devolver Plugin_Handled para indicar que el temporizador ha terminado correctamente
     return Plugin_Handled;
