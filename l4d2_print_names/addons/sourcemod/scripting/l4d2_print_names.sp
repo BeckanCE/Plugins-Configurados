@@ -66,6 +66,6 @@ public void OnRoundIsLive()
 
     // Imprimir los equipos y el mapa en el chat
     CPrintToChatAll("{green}> {olive}Mapa{default}: {green}%s", mapName);
-    CPrintToChatAll("{green}> {blue}Supervivientes{default}: %s", survivorNames);
-    CPrintToChatAll("{green}> {red}Infectados{default}: %s", infectedNames);
+    CPrintToChatAll("{green}> {olive}Supervivientes{default}: %s", survivorNames);
+    CPrintToChatAll("{green}> {olive}Infectados{default}: %s", infectedNames);
 }
