@@ -250,7 +250,7 @@ void LoadMasterListFromFile()
 public void OnClientActive(int client)
 {
     if (g_bIsReadyUpActive && g_sCurrentMusic[0] != '\0' && g_hDelayedStartTimer == null && !IsFakeClient(client)) {
-        CreateTimer(1.5, Timer_PlayForLateJoiner, GetClientUserId(client), TIMER_FLAG_NO_MAPCHANGE);
+        CreateTimer(30.0, Timer_PlayForLateJoiner, GetClientUserId(client), TIMER_FLAG_NO_MAPCHANGE);
     }
 }
 
