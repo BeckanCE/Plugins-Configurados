@@ -1,7 +1,0 @@
-villancicos/BurritoSabanero.mp3
-villancicos/CampanaSobreCampana.mp3
-villancicos/CholitoJesus.mp3
-villancicos/LosPecesEnElRio.mp3
-villancicos/PopurriDeNavidad.mp3
-villancicos/SenorSanJose.mp3
-villancicos/VenACantar.mp3
