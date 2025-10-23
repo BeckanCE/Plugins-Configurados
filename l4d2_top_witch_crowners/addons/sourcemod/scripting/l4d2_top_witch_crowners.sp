@@ -270,14 +270,14 @@ public void Event_Witch_Killed(Event event, const char[] name, bool dontBroadcas
 
 		if (CvarAnnounce)
 		{
-			CPrintToChatAll("[{green}Top Crowners{default}] {olive}%N realizo un {green}crown {default}a la {lightgreen}Witch%s", client, (g_hCvar1v1Separate.BoolValue && Is1v1) ? " en 1v1." : "!");
+			CPrintToChatAll("[{green}Top Crowners{default}] {olive}%N {default}realizo un {green}crown {default}a la {lightgreen}Witch%s", client, (g_hCvar1v1Separate.BoolValue && Is1v1) ? " en 1v1." : "!");
 		}
 	}
 	else
 	{
 		if (CvarAnnounce && !IsFakeClient(client))
 		{
-			CPrintToChat(client, "[{green}Top Crowners{default}] Mataste a la {lightgreen}Witch, ¡pero no fue un {green}crown!");
+			CPrintToChat(client, "[{green}Top Crowners{default}] Mataste a la {lightgreen}Witch{default}, ¡pero no fue un {green}crown!");
 		}
 	}
 }
